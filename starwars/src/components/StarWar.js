@@ -1,6 +1,12 @@
 import React from 'react';
-const StarWarChar = ({ char }) => {
-    return <li>{ char }</li>
+import StarWarChar from './StarWarChar';
+
+const StarWar = ({charList}) => {
+    return (
+        charList.map(char => {
+            return <StarWarChar char={char.name} key={char.created} />
+        })
+    )
 }
 
-export default StarWarChar;
+export default StarWar;
