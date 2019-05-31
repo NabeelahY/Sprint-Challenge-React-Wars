@@ -29,14 +29,16 @@ class App extends Component {
       .catch(err => {
         throw new Error(err);
       });
-      console.log(URL)
+    console.log(URL)
   };
 
   render() {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <StarWar charList={this.state.starwarsChars} />
+        <ul className='list'>
+          <StarWar charList={this.state.starwarsChars} />
+        </ul>
       </div>
     );
   }
