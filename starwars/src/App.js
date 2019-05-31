@@ -30,7 +30,6 @@ class App extends Component {
         if(data.next === null) {
           this.setState({ 
             starwarsChars: data.results,
-            previousChars: [],
             nextChars: []
           });
         } else {
