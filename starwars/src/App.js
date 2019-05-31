@@ -74,8 +74,8 @@ class App extends Component {
         <ul className='list'>
           <StarWar charList={this.state.starwarsChars} />
         </ul>
-        <NavButton nav= {this.handlePrevious} text={'Previous'} />
-        <NavButton nav= {this.handleNext} text={'Next'} />
+        {this.state.previousChars.length !== 0 ? <NavButton nav= {this.handlePrevious} text={'Previous'} /> : ''}
+        {this.state.nextChars.length !== 0 ? <NavButton nav= {this.handleNext} text={'Next'} /> : ''}
       </div>
     );
   }
