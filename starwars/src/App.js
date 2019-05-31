@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import StarWar from './components/StarWar';
-import NextButton from './components/NextBtn';
+import NavButton from './components/NavBtn';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       starwarsChars: [],
+      previousChars: [],
       nextChars: []
     };
   }
@@ -29,21 +30,38 @@ class App extends Component {
         if(data.next === null) {
           this.setState({ 
             starwarsChars: data.results,
+            previousChars: [],
             nextChars: []
           });
+        } else {
+          this.setState({ 
+            starwarsChars: data.results,
+            nextChars: data.next
+          });
         }
-          else if(data.next !== null){
+          
+          if(data.previous === null){
             this.setState({ 
               starwarsChars: data.results,
-              nextChars: data.next
+              previousChars: []
+            });
+          } else {
+            this.setState({ 
+              starwarsChars: data.results,
+              previousChars: data.previous
             });
           }
+          console.log(this.state.previousChars) 
           console.log(this.state.nextChars) 
       })
       .catch(err => {
         throw new Error(err);
       });
   };
+
+  handlePrevious = () => {
+    return this.getCharacters(this.state.previousChars);
+   }
 
   handleNext = () => {
    return this.getCharacters(this.state.nextChars);
@@ -56,7 +74,8 @@ class App extends Component {
         <ul className='list'>
           <StarWar charList={this.state.starwarsChars} />
         </ul>
-        <NextButton next= {this.handleNext} />
+        <NavButton nav= {this.handlePrevious} text={'Previous'} />
+        <NavButton nav= {this.handleNext} text={'Next'} />
       </div>
     );
   }
