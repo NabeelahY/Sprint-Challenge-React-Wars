@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import StarWar from './components/StarWar';
+import NextButton from './components/NextBtn';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      nextChars: []
     };
   }
 
@@ -23,14 +25,29 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
         console.log(data)
+        if(data.next === null) {
+          this.setState({ 
+            starwarsChars: data.results,
+            nextChars: []
+          });
+        }
+          else if(data.next !== null){
+            this.setState({ 
+              starwarsChars: data.results,
+              nextChars: data.next
+            });
+          }
+          console.log(this.state.nextChars) 
       })
       .catch(err => {
         throw new Error(err);
       });
-    console.log(URL)
   };
+
+  handleNext = () => {
+   return this.getCharacters(this.state.nextChars);
+  }
 
   render() {
     return (
@@ -39,6 +56,7 @@ class App extends Component {
         <ul className='list'>
           <StarWar charList={this.state.starwarsChars} />
         </ul>
+        <NextButton next= {this.handleNext} />
       </div>
     );
   }
