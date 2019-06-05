@@ -1,0 +1,27 @@
+li {
+    list-style: none;
+    width: 30%;
+    margin: 1rem;
+}
+
+.starwar-char {
+    color: #333;
+    font-size: 1rem;
+    width: 100%;
+    background-color: bisque;  
+    padding: 0.5rem ;    
+}
+
+.starwar-char p {
+    text-align: left;
+}
+
+.navBtn {
+    width: 6rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: rosybrown;
+    border: none;
+    margin: 0.5rem;
+    color: white;
+}
